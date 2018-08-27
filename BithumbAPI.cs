@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
@@ -61,72 +61,72 @@ namespace Bithumb
         public string GetAccount(string currency)
         {
             string url = "https://api.bithumb.com/info/account";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } });
         }
         public string GetBalance(string currency)
         {
             string url = "https://api.bithumb.com/info/balance";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } });
         }
         public string GetWalletAddress(string currency)
         {
             string url = "https://api.bithumb.com/info/wallet_address";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "currency", currency } });
         }
         public string GetTicker_Private(string order_currency)
         {
             string url = "https://api.bithumb.com/info/ticker";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_currency", order_currency }, { "payment_currency", "KRW" } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_currency", order_currency }, { "payment_currency", "KRW" } });
         }
         public string GetOrders(string order_id, BithumbOrderType type, int count, DateTime after, string currency)
         {
             string url = "https://api.bithumb.com/info/orders";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "after", new DateTimeOffset(after).ToUnixTimeSeconds().ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "after", new DateTimeOffset(after).ToUnixTimeSeconds().ToString() }, { "currency", currency } });
         }
         public string Getuser_transactions(int offset, int count, BithumbTransactionType searchGb, string currency)
         {
             string url = "https://api.bithumb.com/info/user_transactions";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "offset", offset.ToString() }, { "count", count.ToString() }, { "searchGb", ((int)searchGb).ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "offset", offset.ToString() }, { "count", count.ToString() }, { "searchGb", ((int)searchGb).ToString() }, { "currency", currency } });
         }
         public string PlaceOrder(string order_currency, float units, int price, BithumbOrderType type)
         {
             string url = "https://api.bithumb.com/trade/place";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_currency", order_currency }, { "payment_currency", "KRW" }, { "units", units.ToString() }, { "price", price.ToString() }, { "type", type.ToString() } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_currency", order_currency }, { "payment_currency", "KRW" }, { "units", units.ToString() }, { "price", price.ToString() }, { "type", type.ToString() } });
         }
         public string GetOrderDetail(string order_id, BithumbOrderType type, string currency)
         {
             string url = "https://api.bithumb.com/info/order_detail";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "currency", currency } });
         }
         public string CancelOrder(string order_id, BithumbOrderType type, string currency)
         {
             string url = "https://api.bithumb.com/trade/cancel";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "order_id", order_id }, { "type", type.ToString() }, { "currency", currency } });
         }
         public string WithdrawCrypto(float units, string address, string destination, string currency)
         {
             string url = "https://api.bithumb.com/trade/btc_withdrawal";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "address", address }, { "destination", destination }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "address", address }, { "destination", destination }, { "currency", currency } });
         }
         public string GetKRWDepositInfo()
         {
             string url = "https://api.bithumb.com/trade/krw_deposit";
-            return CallAPI_Private_NoParam(url, HttpMethod.Post);
+            return CallAPI_Private_NoParam(url);
         }
         public string WithdrawKRW(string bank, string account, int amount)
         {
             string url = "https://api.bithumb.com/trade/krw_withdrawal";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "bank", bank }, { "account", account }, { "price", amount.ToString() } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "bank", bank }, { "account", account }, { "price", amount.ToString() } });
         }
         public string PlaceOrder_MarketBuy(float units, string currency)
         {
             string url = "https://api.bithumb.com/trade/market_buy";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "currency", currency } });
         }
         public string PlaceOrder_MarketSell(float units, string currency)
         {
             string url = "https://api.bithumb.com/trade/market_sell";
-            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "currency", currency } }, HttpMethod.Post);
+            return CallAPI_Private_WithParam(url, new NameValueCollection { { "units", units.ToString() }, { "currency", currency } });
         }
 
 
@@ -137,25 +137,25 @@ namespace Bithumb
             var response = httpClient.GetAsync(url + "?" + ToQueryString(nvc)).Result;
             return response.Content.ReadAsStringAsync().Result;
         }
-        private string CallAPI_Private_WithParam(string url, NameValueCollection nvc, HttpMethod httpMethod)
+        private string CallAPI_Private_WithParam(string url, NameValueCollection nvc)
         {
-            var requestMessage = BuildHttpRequestMessage(url, httpMethod, nvc);
+            var requestMessage = BuildHttpRequestMessage(url, nvc);
             var response = httpClient.SendAsync(requestMessage).Result;
             return response.Content.ReadAsStringAsync().Result;
         }
-        private string CallAPI_Private_NoParam(string url, HttpMethod httpMethod)
+        private string CallAPI_Private_NoParam(string url)
         {
-            var requestMessage = BuildHttpRequestMessage(url, httpMethod);
+            var requestMessage = BuildHttpRequestMessage(url);
             var response = httpClient.SendAsync(requestMessage).Result;
             return response.Content.ReadAsStringAsync().Result;
         }
-        private HttpRequestMessage BuildHttpRequestMessage(string url, HttpMethod httpMethod, NameValueCollection nvc = null)
+        private HttpRequestMessage BuildHttpRequestMessage(string url, NameValueCollection nvc = null)
         {
             string endPoint = url.Replace("https://api.bithumb.com", "");
             string postData = (nvc == null) ? "" : ToQueryString(nvc) + "&endpoint=" + Uri.EscapeDataString(endPoint); ;
             long nonce = MicroSecTime();
 
-            var requestMessage = new HttpRequestMessage(httpMethod, new Uri(url));
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(url));
             requestMessage.Headers.Add("Api-Key", this.httpClient.AccessKey);
             requestMessage.Headers.Add("Api-Sign", Convert.ToBase64String(StringToByte(Hash_HMAC(httpClient.SecretKey, endPoint + (char)0 + postData + (char)0 + nonce.ToString()))));
             requestMessage.Headers.Add("Api-Nonce", nonce.ToString());
